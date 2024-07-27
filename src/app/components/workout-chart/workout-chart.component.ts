@@ -1,4 +1,5 @@
-import { Component, OnInit, AfterViewInit,ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, PLATFORM_ID, Inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { Chart, registerables } from 'chart.js';
 import { UserDataService } from '../../services/user-data.service';
@@ -17,14 +18,17 @@ export class WorkoutChartComponent implements OnInit, AfterViewInit {
   chartCanvas!: ElementRef;
   chart: any;
 
-  constructor(private userDataService: UserDataService) {}
+  constructor(private userDataService: UserDataService, 
+    @Inject(PLATFORM_ID) private platformId: Object) {}
   
   
   ngOnInit(): void {
     //this.createChart();
   }
   ngAfterViewInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
     this.createChart();
+  }
   }
   
   createChart(): void {
