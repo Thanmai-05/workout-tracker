@@ -57,9 +57,9 @@ export class UserDataService {
     this.users.push(newUser);
     this.updateUsers();
     }
-    //else{
-    //  this.addWorkout(user.name,workout)
-    //}
+    else{
+      alert("User already exists!!.")
+    }
   }
 
 
@@ -69,6 +69,7 @@ export class UserDataService {
     if (user) {
       user.workouts.push(workout);
       this.updateUsers();
+      alert("Workout added successfully!!.");
     }
   }
 
