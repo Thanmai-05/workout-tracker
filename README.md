@@ -132,3 +132,5 @@ Contributions, issues, and feature requests are welcome. Feel free to check [iss
 ## License
 
 This project is [MIT](https://choosealicense.com/licenses/mit/) licensed.
+
+[![codecov](https://codecov.io/github/Thanmai-05/workout-tracker/graph/badge.svg?token=Q2ZL8PJGPB)](https://codecov.io/github/Thanmai-05/workout-tracker)
