@@ -15,11 +15,11 @@ module.exports = function (config) {
       },
       coverageIstanbulReporter: {
         dir: require('path').join(__dirname, './coverage/workout-tracker'),
-        reports: ['html', 'lcovonly', 'text-summary'],
+        reporters: [{type:'html'},{type: 'lcov'},{type: 'text-summary'}],
         fixWebpackSourcePaths: true,
         subdir:'.'
       },
-      reporters: ['progress', 'kjhtml'],
+      reporters: ['progress', 'kjhtml', 'coverage-istanbul'],
       port: 9876,
       colors: true,
       logLevel: config.LOG_INFO,
