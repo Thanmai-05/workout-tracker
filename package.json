@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "test:coverage": "ng test --code-coverage && codecov",
+    "test:coverage": "ng test --code-coverage && npx codecov",
     "serve:ssr:workout-tracker": "node dist/workout-tracker/server/server.mjs"
   },
   "private": true,

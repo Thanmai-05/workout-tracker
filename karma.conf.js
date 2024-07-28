@@ -15,8 +15,9 @@ module.exports = function (config) {
       },
       coverageIstanbulReporter: {
         dir: require('path').join(__dirname, './coverage/workout-tracker'),
-        reporters: [{type:'html'},{type: 'lcov'},{type: 'text-summary'}],
+        reports: ['html','lcovonly','text-summary'],
         fixWebpackSourcePaths: true,
+        'report-config':{html:{subdir: 'html'}, lcononly :{subdir: '.', file: 'lcov.info'}},
         subdir:'.'
       },
       reporters: ['progress', 'kjhtml', 'coverage-istanbul'],
