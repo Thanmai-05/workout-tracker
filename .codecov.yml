@@ -1,0 +1,12 @@
+codecov:
+  branch: true
+  files:
+    - coverage/workout-tracker/lcov.info
+  flags:
+    - unittest
+  comment: true
+  notify:
+    email:
+      recipients:
+        - jalakamthanmai05@gmail.com
+  

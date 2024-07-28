@@ -1,4 +1,6 @@
 name: CI
+codecov: 
+ token: 00546689-b22d-4932-a361-13002f38c68c
 
 on:
   push:
@@ -19,7 +21,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '14'
+        node-version: '16'
 
     - name: Install dependencies
       run: npm install
