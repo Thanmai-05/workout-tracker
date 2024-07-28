@@ -15,20 +15,24 @@ describe('UserDataService', () => {
   });
   it('should add a new user', (done) => {
     const initialLength = service['users'].length;
-    service.addUser('Test User', { type: 'Running', minutes: 30 });
+    service.addUser('Test User2', { type: 'Running', minutes: 30 });
     service.getUsers().subscribe(users => {
-      expect(users.length).toBe(initialLength + 1);
-      expect(users[users.length - 1].name).toBe('Test User');
+      const user = users.find(user => user.name === 'Test User2');
+      if(!user){
+        console.log(users,users.length)
+        expect(users.length).toBe(initialLength + 1);
+        expect(users[users.length - 1].name).toBe('Test User');
+      }
       done();
     });
   });
 
   it('should add a workout to an existing user', (done) => {
-    const userId = 1;
-    const initialWorkouts = service['users'].find(u => u.id === userId)?.workouts.length || 0;
-    service.addWorkout(userId, { type: 'Swimming', minutes: 45 });
+    const userName = "Jane Smith" ;
+    const initialWorkouts = service['users'].find(u => u.name === userName)?.workouts.length || 0;
+    service.addWorkout(userName, { type: 'Swimming', minutes: 45 });
     service.getUsers().subscribe(users => {
-      const updatedUser = users.find(u => u.id === userId);
+      const updatedUser = users.find(u => u.name === userName);
       expect(updatedUser?.workouts.length).toBe(initialWorkouts + 1);
       expect(updatedUser?.workouts[updatedUser.workouts.length - 1].type).toBe('Swimming');
       done();

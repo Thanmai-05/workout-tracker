@@ -55,10 +55,11 @@ export class UserDataService {
       workouts: [workout]
     };
     this.users.push(newUser);
-    this.updateUsers();}
-    else{
-      this.addWorkout(user.name,workout)
+    this.updateUsers();
     }
+    //else{
+    //  this.addWorkout(user.name,workout)
+    //}
   }
 
 

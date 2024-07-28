@@ -13,8 +13,8 @@ describe('UserListComponent', () => {
     const spy = jasmine.createSpyObj('UserDataService', ['getUsers']);
 
     await TestBed.configureTestingModule({
-      declarations: [ UserListComponent ],
-      imports: [ FormsModule ],
+      
+      imports: [ FormsModule,UserListComponent ],
       providers: [
         { provide: UserDataService, useValue: spy }
       ]
@@ -32,15 +32,26 @@ describe('UserListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should filter users by name', () => {
-    const mockUsers = [
-      { id: 1, name: 'John Doe', workouts: [] },
-      { id: 2, name: 'Jane Smith', workouts: [] }
+  it('should load users on init', () => {
+    const testUsers = [
+      { id: 1, name: 'John Doe', workouts: [{ type: 'Running', minutes: 30 }] },
+      { id: 2, name: 'Jane Smith', workouts: [{ type: 'Swimming', minutes: 45 }] }
     ];
-    userDataServiceSpy.getUsers.and.returnValue(of(mockUsers));
+    userDataServiceSpy.getUsers.and.returnValue(of(testUsers));
 
-    fixture.detectChanges();
+    fixture.detectChanges(); // This calls ngOnInit
+
+    expect(component.users).toEqual(testUsers);
+    expect(component.filteredUsers).toEqual(testUsers);
+  });
+
+  it('should filter users by name', () => {
+    component.users = [
+      { id: 1, name: 'John Doe', workouts: [{ type: 'Running', minutes: 30 }] },
+      { id: 2, name: 'Jane Smith', workouts: [{ type: 'Swimming', minutes: 45 }] }
+    ];
     component.searchTerm = 'John';
+    
     component.applyFilters();
 
     expect(component.filteredUsers.length).toBe(1);
@@ -48,17 +59,15 @@ describe('UserListComponent', () => {
   });
 
   it('should filter users by workout type', () => {
-    const mockUsers = [
+    component.users = [
       { id: 1, name: 'John Doe', workouts: [{ type: 'Running', minutes: 30 }] },
       { id: 2, name: 'Jane Smith', workouts: [{ type: 'Swimming', minutes: 45 }] }
     ];
-    userDataServiceSpy.getUsers.and.returnValue(of(mockUsers));
-
-    fixture.detectChanges();
-    component.workoutTypeFilter = 'Running';
+    component.workoutTypeFilter = 'Swimming';
+    
     component.applyFilters();
 
     expect(component.filteredUsers.length).toBe(1);
-    expect(component.filteredUsers[0].name).toBe('John Doe');
+    expect(component.filteredUsers[0].name).toBe('Jane Smith');
   });
 });
