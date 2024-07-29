@@ -22,6 +22,8 @@ describe('UserDataService', () => {
         console.log(users,users.length)
         expect(users.length).toBe(initialLength + 1);
         expect(users[users.length - 1].name).toBe('Test User');
+      }else{
+        expect(user.name).toBe('Test User2');
       }
       done();
     });
